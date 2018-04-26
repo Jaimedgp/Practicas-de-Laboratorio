@@ -174,18 +174,18 @@ index[5] = '$[m(B)-m(V)]_{teo}$'
 Data['$[m(B)-m(V)]_{teo}$'] = BVgiven
 
 # represent apparent visual magnitude and experimental B-V
-#Plot(Data, index, [3, 2], 'expAparent', "A")
+Plot(Data, index, [3, 2], 'expAparent', "A")
 
 # represent absolute visual magnitude and theorical B-V
-#Plot(Data, index, [5, 4], 'theoabsolute', "B")
+Plot(Data, index, [5, 4], 'theoabsolute', "B")
 
 #calculate and plot both apparent and absolute magnitude
 slopes, intercepts = Plot2(Data, index, [5, 4, 3, 2], 'both')
 
 print ("Slopes: \n \t m = %g +- %g" %(slopes["m"][0], slopes["m"][1]) 
-	               + "\n \t M = %g +- %g \n" %(slopes["M"][0], slopes["M"][1]))
+	         + "\n \t M = %g +- %g \n" %(slopes["M"][0], slopes["M"][1]))
 print ("Intercept: \n \t m = %g +- %g" %(intercepts["m"][0], intercepts["m"][1]) 
-	               + "\n \t M = %g +- %g \n" %(intercepts["M"][0], intercepts["M"][1]))
+	        + "\n \t M = %g +- %g \n" %(intercepts["M"][0], intercepts["M"][1]))
 
 ########################################
 #   CALCULATE THE DISTANCE MODULUS    ##
@@ -199,15 +199,24 @@ from WidgetsScript import ErrorsCalculator
 mM = intercepts["m"][0] - intercepts["M"][0]
 
 STD = ErrorsCalculator("m M",[intercepts["m"][0], intercepts["M"][0]],
-                           [intercepts["m"][1], intercepts["M"][1]], "m - M")
+                       [intercepts["m"][1], intercepts["M"][1]], "m - M")
 
 print "M-m = %g +- %g \n" %(mM, STD)
 
-########################################
-#     CALCUALTE THE DISTANCE IN PC    ##
-########################################
+##################################
+#     CALCUALTE THE DISTANCE    ##
+##################################
+
+# in parsec
 
 D = 10**((mM/5)+1)
 STD_D = ErrorsCalculator("mM",[mM], [STD], "10**((mM/5)+1)")
 
-print "D = %g +- %g \n" %(D, STD_D)
+print "D = %g +- %g pc \n" %(D, STD_D)
+
+# in LY, 1pc = 3.26156 ly
+
+Dly = D*3.26156
+std_Dly = STD_D*3.26156
+
+print "D = %g +- %g ly \n" %(Dly, std_Dly)
