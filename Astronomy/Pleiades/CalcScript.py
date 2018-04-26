@@ -128,7 +128,7 @@ def Plot2(data, index, axes, name):
 	# Calculate the linear regression
 	slope, intercept, r_value, p_value, error = stats.linregress(BVs, mV)
 
-	
+	#Calc os standar deviation of the intercept
 	BVmean = np.mean(BVs)
 	sx2 = ((BVs-BVmean)**2).sum()
 	std_intercept = error * np.sqrt(1./len(BVs) + BVmean*BVmean/sx2)
