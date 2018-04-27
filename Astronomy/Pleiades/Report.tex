@@ -26,6 +26,10 @@
 %\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
 \usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
 
+\usepackage{datetime}
+\newdateformat{monthyeardate}{\monthname[\THEMONTH], \THEYEAR}
+%\newdateformat{today}{\monthname[\THEMONTH], \date \THEYEAR}
+
 \usepackage{abstract} % Allows abstract customization
 \renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
 \renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
@@ -40,9 +44,9 @@
 \pagestyle{fancy} % All pages have headers and footers
 \fancyhead{} % Blank out the default header
 \fancyfoot{} % Blank out the default footer
-\fancyhead[C]{Experimental Optics % based on TRACS 
-\hspace{4pt} $\bullet$ \hspace{4pt} Short Title
-\hspace{4pt} $\bullet$ \hspace{4pt} Month Year} % Custom header text
+\fancyhead[C]{Astronomy % based on TRACS 
+\hspace{4pt} $\bullet$ \hspace{4pt} Pleiades
+\hspace{4pt} $\bullet$ \hspace{4pt} \monthyeardate\today} % Custom header text
 \fancyfoot[RO,LE]{\thepage} % Custom footer text
 
 \usepackage{cite}
@@ -56,7 +60,7 @@
 \title{
 	\vspace{-15mm}
 	\fontsize{28pt}{10pt}
-	\selectfont\textbf{TITLE}% Article title
+	\selectfont\textbf{Photoelectric Photometry of the Pleaides}% Article title
 }
 
 \author{
@@ -64,12 +68,12 @@
 	\textsc{Jaime Díez González-Pardo}\\[4mm]%\thanks{A thank you or further information}\\[2mm] % Your name
 	\fontsize{28pt}{10pt} University of Cantabria \\ % Your institution
 	%\thanks{A thank you or further information}\\[2mm] % Your name
-	\normalsize Experimental Optics \\ 
+	\normalsize Astronomy \\ 
 	%\normalsize{Compañera:} \textsc{Mónica Escobedo}\\%\normalsize \href{mailto:john@smith.com}{john@smith.com} % Your email address
 	%\vspace{5mm}
 }
 
-\date{ \today }
+\date{ \usdate\today }
 
 
 %----------------------------------------------------------------------------------------
@@ -92,6 +96,8 @@
 
 		\noindent% Dummy abstract text
 
+		The distance to the Pleiades' star cluster has been determine muassuring the apparent magnitude (for blue and visual filters) by means of a photometer using the program CLEA, and obtaining a value of $D = 125 \pm 14 \textrm{ pc} = 406 \pm 47 \textrm{ ly}$. To this aim, the Hertzsprung-Russell (\textbf{H-R}) diagram for the Pleiades star cluster has been compared with the (\textbf{H-R}) diagram of known main sequence stars, observing also the main sequence of the Pleiades cluster.
+
 	\end{abstract}
 
 %----------------------------------------------------------------------------------------
@@ -102,17 +108,140 @@
 
 		\section{Introduction} % Scope of the project = rad effects + minimization
 
-			
+			Stars are continuously emitting energy which could be express in terms of its luminosity ($L = \frac{\mathrm{d} E}{\mathrm{d} t}$) or its flux ($F = \frac{L}{area}$). The apparent magnitud $m$ of a certain star, at unknown distance, is express in therms of the ratio of its flux $F$ over a reference flux $F_*$ by the equation \ref{eq:apparentTheo}.
+
+				\begin{equation}
+					m = -2.5 log_{10} \left(\frac{F}{F_*} \right)
+					\label{eq:apparentTheo}
+				\end{equation}
+
+			As well, the absolute magnitud $M$ is defined as the apparent magnitud of the star if it were at a distance of $10$ pc. By this way, the absolute magnitud relate the apparent magnitud to the distancefrom the earth to the star. this relation is called the distance modulus $m-M$.
+
+				\begin{equation}
+					m-M = 5 log_{10} (D_{(pc)})-5
+				\end{equation}
+
+			Distance modulus expression were $D$ is the distance to the star en parsec. from this equation, an expression for the distance $D$ in function of its apparent and absolute magnitude can be obtained.
+
+				\begin{equation}
+					D = 10^{\frac{m-M}{5} +1}
+					\label{eq:distanceTheo}
+				\end{equation}
+
+			Due to both magnitudes give information about the flux of stars, and therefore its energy, it could be used to determine the state of the star. One of the ways used to represent it is the Hertzsprung-Russell (\textbf{H-R}) diagram.
+
+			In a Hertzsprung-Russell (\textbf{H-R}) diagram the absolute magnitud $M$ of a certain star cluster are plot as function of the spectral type ("Color index") which are related with the temperature of the star. In those types of diagram is posiblle to observe some defined regions which indicate the state of the star. 
+
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.25]{Figures/hrcolour.jpg}
+					\caption{\label{Img:HRTheo}Hertzsprung-Russell (\textbf{H-R}) diagram with four differents states of the stars: White Dwarfs, Main sequence, Giants and Super Giants. \cite{HRdiagram}}
+				\end{figure}
+
+			In Figure \ref{Img:HRTheo} an Hertzsprung-Russell (\textbf{H-R}) diagram is shown with four different regions corresponding to the evolutionary state of the star. The White Dwarf, in the left botton part of the diagram,the oldest with lowest luminosity but high temperature; Red Gigants and Supergigants, at top right; high luminosity and low temperature; and the Main sequence, the long diagonal line, where the stars spend most of their time.
 
 		\section{Methods}
 
-			
+			In this experiment the CLEA program \textit{Photoelectric Photometry of the Pleiades} has been used to record the apparent magnitudes of 24 stars on the region of the Pleiades star cluster.
+
+			This program allows to simulate the real procedure to take meassures in a real telescope, been necessary to request for bigger telescopes havin limit number of measuresfor each. For that reason meassures have been taken with three differents telescopes with diameters of 0.4, 1 and 4 meters.
+
+			Once in the control panel, the corresponding star of study have been located by its coordinates archived in the program. The control panel allows to track the star in order to not lose it. This tracking is necessary due to, although the movement of the star is negligible form the earth, the earth is also rotating so the image of the star will move from east to west i opposite direction of the rotation move.
+
+			Before measure the apparent magnitude of the star by the photometer is necessary to measure the background, by measure the sky, in order to minimaze the noise. This must be done for each filter in each telescope.
+
+			After tracking the star and the sky noise has been measured, one of the posible filter ($B$, for blue, and $V$, for visual) has been selected and the measure started. The measure is made by means of integrations (number of times a measure is repeated) so it is necesary to select the wanted integrations and the duration of each integration. This selection is done trying to mantaing the signal noise, or $S/N$ ratio, in $100$. If this value is shown to increase or decrese, integrations or time should be change.
+
+			Once the apparent magnitude in one of the filters is recorded, the filter is changed and the apparent magnitude measured again. Then, change the localization to another star and repeat the process.
 
 		\section{Results}
 
+			The apparent visual and blue magnitude ($m_V\textrm{ and }m_B$ respectivily) of 24 differents stars on the region of the Pleiades star cluster have been measured using the CLEA program \textit{Photoelectric Photometry of the Pleiades}. All the data obtained at the laboratory are shown in Table \ref{Tab:RawData}, in Appendix \ref{app:RawData}.
 
+			In Figure \ref{Img:Apparent} the apparent visual magnitud, $m_V$, and the color index, $m_B - m_V$, are plotted in a Hertzsprung-Russell (\textbf{H-R}) diagram showing the main sequence of the stars.
+
+				% Aparrent Magnitude
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.35]{Figures/expAparent.png}
+					\caption{\label{Img:Apparent}(\textbf{H-R}) diagram of apparent visual magnitud $m_V$ of 24 differents stars on the region of the Pleiades star cluster as function of their color index $m_B - m_V$.}
+				\end{figure}
+
+			On the other hand, the absolute visual magnitude, $M_V$, of known main sequence stars, as well as the color index, $M_B - M_V$; are known \cite{Pleiades} and appear in Table \ref{Tab:GivenData}, in Appendix \ref{app:GivenData}.
+
+			In Figure \ref{Img:Absolute} the absolute magnitude , $M_V$, and the color index, $M_B - M_V$, of the known main sequence stars \cite{Pleiades}, are plotted in a (\textbf{H-R}) diagram, showing again the main sequence of the stars.
+
+				% Absolute Magnitude
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.35]{Figures/theoabsolute.png}
+					\caption{\label{Img:Absolute}(\textbf{H-R}) diagram of absolute visual magnitud $M_V$ of known main sequence stars as function of their color index $M_B - M_V$.}
+				\end{figure}
+
+			In order to compare both magnitudes, $M_V$ and $m_V$, they have been plotted in a same (\textbf{H-R}) diagram. However, due to some of the experimental values of the apparent visual magnitude $m_V$ at the edges of the diagram could be out the main sequence, only some values of both magnitudes at the $B-V$ \footnote{\label{ft:BV}$B$ and $V$ represent the corresponding magnitude for blue ($B$) or visual ($V$)} middle zone have been plotted.
+
+			Table \ref{Tab:MiddleData} shows the values used in order to obtain the linear regression to determine the distance $D$.
+
+				\input{TexTables/middleData}
+
+			In Figure \ref{Img:Both} both visual apparent ($m_V$) and absolute ($M_V$) magnitudes have been plotted in a (\textbf{H-R}) diagram as a function of their color index ($B-V^{\ref{ft:BV}}$). Only stars at the the $B-V^{\ref{ft:BV}}$ middle zone are plotted.
+
+				% Both
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.35]{Figures/both.png}
+					\caption{\label{Img:Both}Visual apparent ($m_V$, blue stars) and absolute ($M_V$, red dots) magnitudes as a function of their color index ($B-V^{\ref{ft:BV}}$). Y-axis range are different for both magnitudes been $[17, -8]$ for $M_V$ and $[25, 0]$ for $m_V$. Both adjust have been done by a linear regression.}
+				\end{figure}
+
+			The linear regression done allow to obtain slopes and intercepts for both magnitudes. This values appear in Table \ref{Tab:Regression}.
+
+				% Linear Regression values
+				\begin{table}[H]
+					\centering
+					\begin{tabular}{c || c c}
+						\hline
+						\centering
+							 & Slope & Intercept  \\ \hline
+							$m_V$ & $5.3 \pm 0.3$ & $6.7 \pm 0.2$ \\ 
+					        $M_V$ & $5.30 \pm 0.12$ & $1.23 \pm 0.11$ \\ \hline
+					\end{tabular}
+					\caption{\label{Tab:Regression}Slopes and intercepts for both magnitudes with their standard deviation [\ref{app:calc}].}
+				\end{table}
+
+			Both slopes are shown to be equal, which means both adjust are paralel each other. Thus the difference between both magnitudes' adjust must be the same for whatever color index value. The difference $m_V - M_V$ is going to be obtained by means of intercepts values which correspond to a star with color index $B - V = 0$.
+
+				\begin{equation}
+					m_V^{intercept} - M_V^{intercept} = 5.5 \pm 0.3 
+				\end{equation}
+
+			Once the difference has been determined, the distance $D$, in parsec, can be calculate by equation \ref{eq:distanceTheo}. The value of $D$ in light years has been obtained taking into account that $1 \textrm{ pc} = 3.26156 \textrm{ ly}$.
+
+				\begin{equation}
+					D = 125 \pm 14 \textrm{ pc} = 406 \pm 47 \textrm{ ly}
+				\end{equation}
 
 		\section{Conclussions}
+
+			Three different telescopes with diameters of 0.4, 1 and 4 meters have been used in order to meassure the apparent magnitude of 24 stars on the region of the Pleiades star cluster by means of a photometer with two filters,  blue filter $m_B$ and visual filter $m_V$, been able to obtain their color index and, therefore, a (\textbf{H-R}) diagram.
+
+			From that diagram, it has been possible to determine that almost all the stars measured are in the main sequence. There are two stars ($N2230-00985$ and $N2230-02192$) that differ above the main sequence coulding be two Red Giants according to the diagram of the Figure \ref{Img:HRTheo}. As well, the star $N2230-01554$ differs below the main sequence coulding be a White Dwarf. 
+
+			The index color ($B-V$) of the (\textbf{H-R}) gives information about the range of emision of stars, and therefore, its temperature. The hottest star would emites in the blue range with the lowest color index ($B-V$) value. By this terms and according to the diagram \ref{Img:Apparent}, the hottest star meassured is $N2230-01585$ with an color index $B-v = -0.11$. On the other hand, the apparent visual magnitude $m_V$ is related by equation \ref{eq:apparentTheo} with the luminosity. Lower apparent magnitud means higher luminosity, so for stars of Table \ref{Tab:RawData} in the diagram \ref{Img:Apparent} the brightest star is $N2230-02202$.
+
+			Once linear regression of both magnitudes in the (\textbf{H-R}) diagram have been done is possible to obtain the absolute or apparent magnitude for whatever star from its color index $B-V$ by the adjust equation given by the slope and the intercept. By this way, the absolute and apparent magnitud can be calculated for the Sun (type $G2$ and $B-V = 0.62$) if it were in the Pleiades cluster.
+
+			Comparing those values with absolute magnitud of known main sequence stars, the distance to the Pleiades star cluster has been obtained with a final value of $D = 406 \pm 47 \textrm{ ly}$. This value is compatible and very similiar which the obtained in In 1958 by \textit{H.L. Johnson} and \textit{R.I. Mitchell} of $410 \textrm{ly}$. The discrepancy between both values is about less than $1\%$.
+
+				\begin{equation}
+					\begin{matrix}
+						M_V = 5.30 \cdot (0.62) + 1.23 = 4.516
+						\\
+						\\
+						m_V = 5.3 \cdot (0.62) + 6.7 = 9.986
+					\end{matrix}
+				\end{equation}
+
+
 
 	\end{multicols}
 
@@ -120,16 +249,32 @@
 %     BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
-	%\bibliographystyle{unsrt}
-	%\bibliography{biblio}
+	\bibliographystyle{unsrt}
+	\bibliography{../../biblio}
 
 %----------------------------------------------------------------------------------------
 %     APPENDIX
 %----------------------------------------------------------------------------------------
 
-%\newpage
 
-		%\appendix
+			\appendix
+
+				\section{Given Data of the Absolute Magnitud}
+					\label{app:GivenData}
+
+					\input{TexTables/givenData}
+
+			\newpage
+
+				\section{Raw Data Obtained in the Laboratory}
+					\label{app:RawData}
+
+					\input{TexTables/data}
+
+				\section{All The Calculus}
+					\label{app:calc}
+
+					All the calculus done in the report, including linear regressions, graphs, and errors propagation have been done using a script wrote by the student in python and available in \cite{github}.
 
 \end{document}
 
